@@ -19,5 +19,4 @@ const getCurrentUser = catchAsync(async (req, res, next) => {
      res.send({success: true, data: {currentUser: user}, message: 'valid token'})
 });
 
-export default getCurrentUser;
- 
+module.exports = getCurrentUser;

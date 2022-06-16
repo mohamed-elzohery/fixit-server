@@ -21,4 +21,4 @@ const login = catchAsync(async (req, res, next) => {
     res.json({success: true, data: user, token, message: 'User is logged in successfully.'});
 });
 
-export default login;
+module.exports = login;
