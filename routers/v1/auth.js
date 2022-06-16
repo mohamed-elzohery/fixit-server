@@ -11,4 +11,4 @@ router.post('/logout', logout);
 router.post('/register', register);
 router.post('/login', login);
 
-export {router as authRouter};
+module.exports = router;

@@ -13,8 +13,8 @@ const errorHandler = (err, req, res, next) => {
   //Schema validation errors
   //handle normal validation errors.
   if (err.name && err.name === 'ValidationError') {
-    error.message = Object.keys(err.errors).map(
-      (erro) => err.errors[erro].properties.message
+    error.message = Object.keys(err.errors).forEach(
+      (erro) => error[erro] = err.errors[erro].properties.message
     );
     error.statusCode = 400;
   }

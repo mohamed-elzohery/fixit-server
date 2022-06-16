@@ -23,7 +23,8 @@ const userSchema = new Schema(
     },
     username: {
       type: String,
-      match: [/^[^0-9][a-zA-Z0-9_]+$/, "Invalid username"]
+      match: [/^[^0-9][a-zA-Z0-9_]+$/, "Invalid username"],
+      required: [true, 'username is required'],
     },
     role: {
       type: String,
@@ -38,7 +39,7 @@ const userSchema = new Schema(
     },
     phone: {
         type: String,
-        required: [true, phone],
+        required: [true, 'Phone is requried'],
         validate: {
             validator: isMobilePhone,
             message: 'Enter valid phone number'
@@ -61,8 +62,9 @@ userSchema.methods.isPasswordMatched = async function (enteredPassword) {
 };
 
 userSchema.methods.createToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_KEY, {
-    expiresIn: process.env.JWT_EXPIRY,
+    console.log(process.env.JWT_AGE)
+  return jwt.sign({ id: this._id, email: this.email }, process.env.JWT_KEY, {
+    expiresIn: +process.env.JWT_AGE / 1000,
   });
 };
 

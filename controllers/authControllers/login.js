@@ -5,11 +5,11 @@ const User = require('../../models/User');
 const login = catchAsync(async (req, res, next) => {
     const {email, password: enteredPassword} = req.body;
     if(!(email && enteredPassword)){
-        return next(new ErrorResponse(400, 'Please enter email and password.', 'LoginErr'));
+        return next(new ErrorResponse(400, 'Please enter email and password.'));
     }
     const user = await User.findOne({email});
-    if(!(user !== null && await user.isPasswordsMatched(enteredPassword))){
-        return next(new ErrorResponse(400, 'Invalid email or password.', 'LoginErr'))
+    if(!(user !== null && await user.isPasswordMatched(enteredPassword))){
+        return next(new ErrorResponse(400, 'Invalid email or password.'))
     }
     const token = user.createToken();
     res.cookie('token_uid', token, {
