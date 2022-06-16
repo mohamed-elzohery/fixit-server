@@ -1,6 +1,10 @@
-import { Router } from "express";
-import { register, login, getCurrentUser, logout } from "../controllers/authController";
+const {Router} = require('express');
 const router = Router();
+
+const register = require('../../controllers/authControllers/register');
+const login = require('../../controllers/authControllers/login');
+const getCurrentUser = require('../../controllers/authControllers/getCurrentUser');
+const logout = require('../../controllers/authControllers/logout');
 
 router.get('/currentuser', getCurrentUser);
 router.post('/logout', logout);
